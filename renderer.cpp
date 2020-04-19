@@ -10,7 +10,7 @@ void Renderer::render(const Canvas& cv) {
     out.open(filename);
     int width = cv.getWidth();
     int height = cv.getHeight();
-    out << "P6\n" << width << " " << height << "\n255\n";
+    out << "P3\n" << width << " " << height << "\n255\n";
     size_t size = width * height;
     for (size_t i = 0; i < size; i++) {
         out << cv[i].getColor();

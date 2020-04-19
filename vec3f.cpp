@@ -135,7 +135,7 @@ void Color::normalize() {
 
 std::ostream& operator<<(std::ostream& out, const Color& c) {
     for (size_t i = 0; i < 3; i++) {
-        out << char(c[i] * 255);
+        out << int(c[i] * 255) << ' ';
     }
     return out;
 }
