@@ -10,8 +10,8 @@ class Vec3f {
         Vec3f(float in_x[3]);
         Vec3f(const Vec3f& v);
         Vec3f operator=(const Vec3f& v);
-        float& operator[](size_t i);
-        const float& operator[](size_t i) const;
+        float& operator[](std::size_t i);
+        const float& operator[](std::size_t i) const;
         Vec3f operator+(const Vec3f& v) const;
         Vec3f operator-() const;
         Vec3f operator-(const Vec3f& v) const;
@@ -23,6 +23,7 @@ class Vec3f {
 
 Vec3f operator*(float a, const Vec3f& v);
 std::ostream& operator<<(std::ostream& out, const Vec3f& v);
+std::istream& operator>>(std::istream& in, Vec3f& v);
 
 class Color: public Vec3f {
     public:
@@ -34,3 +35,4 @@ class Color: public Vec3f {
 };
 
 std::ostream& operator<<(std::ostream& out, const Color& v);
+std::istream& operator>>(std::istream& in, Color& c);

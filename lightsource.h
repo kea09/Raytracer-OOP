@@ -5,11 +5,11 @@
 class LightSource {
     private:
         Vec3f location;
-        double intensity;
+        float intensity;
     public:
         LightSource();
-        LightSource(const Vec3f& loc, double inten);
+        LightSource(const Vec3f& loc, float inten);
         Vec3f getLocation() const;
-        double getIntensity() const;
-        friend std::istream& operator>>(std::istream& in, LightSource& ls);;
+        float getIntensity() const;
+        friend std::istream& operator>>(std::istream& in, LightSource& ls);
 };

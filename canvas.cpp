@@ -12,8 +12,10 @@ Canvas::Canvas(int w, int h) : width(w), height(h) {
     }
 }
 
-void Canvas::draw(const Scene& sc) const {
-
+void Canvas::draw(const Scene& sc) {
+    for (Pixel& p: grid) {
+        p.setColor(sc.castRay(p.getLocation()));
+    }
 }
 
 Pixel& Canvas::operator[](int i) {

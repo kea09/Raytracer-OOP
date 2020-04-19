@@ -13,7 +13,7 @@ class Canvas {
         int height;
     public:
         Canvas(int width, int height);
-        void draw(const Scene& sc) const;
+        void draw(const Scene& sc);
         Pixel& operator[](int i);
         const Pixel& operator[](int i) const;
         int getWidth() const;

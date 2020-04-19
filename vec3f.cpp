@@ -82,6 +82,13 @@ std::ostream& operator<<(std::ostream& out, const Vec3f& v) {
     return out;
 }
 
+std::istream& operator>>(std::istream& in, Vec3f& v) {
+    for (size_t i = 0; i < 3; i++) {
+        in >> v[i];
+    }
+    return in;
+}
+
 float Vec3f::length() {
     float sum = 0;
     for (size_t i = 0; i < 3; i++) {
@@ -123,4 +130,12 @@ std::ostream& operator<<(std::ostream& out, const Color& c) {
         out << (char) (c[i] * 255) << ' ';
     }
     return out;
+}
+
+std::istream& operator>>(std::istream& in, Color& c) {
+    for (size_t i = 0; i < 3; i++) {
+        in >> c[i];
+        c[i] = std::max(0.f, std::min(1.f, c[i] / 255.f));
+    }
+    return in;
 }
