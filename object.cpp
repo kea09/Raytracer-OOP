@@ -21,23 +21,23 @@ std::istream& operator>>(std::istream& in, Object& obj) {
 
 Sphere::Sphere() : Object(), radius(0) {}
 
-Sphere::Sphere(const Vec3f& v, const Color& c, double r) : Object(v, c), radius(r) {}
+Sphere::Sphere(const Vec3f& v, const Color& c, float r) : Object(v, c), radius(r) {}
 
-std::vector<float> Sphere::checkRay(const Vec3f& origin, const Vec3f& direction) const {
+void Sphere::checkRay(const Vec3f& origin, const Vec3f& direction, float& t1, float& t2) const {
     Vec3f oc = origin - location;
+    
     float k1 = direction * direction;
-    float k2 = 2 * (oc * direction);
+    float k2 = 2 * oc * direction;
     float k3 = oc * oc - radius * radius;
+
     float d = k2 * k2 - 4 * k1 * k3;
-    std::vector<float> x;
     if (d < 0) {
-        x.push_back(std::numeric_limits<float>::infinity());
-        x.push_back(std::numeric_limits<float>::infinity());
-        return x;
+        t1 = t2 = std::numeric_limits<float>::infinity();
+        return;
     }
-    x.push_back((-k2 - sqrt(d)) / 2 / k1);
-    x.push_back((-k2 + sqrt(d)) / 2 / k1);
-    return x;
+
+    t1 = (-k2 + sqrt(d)) / (2*k1);
+    t2 = (-k2 - sqrt(d)) / (2*k1);
 }
 
 Vec3f Sphere::getNormalVector(const Vec3f& v) const {

@@ -113,21 +113,29 @@ Color::Color(uint8_t in_x[3]) {
 }
 
 Color::Color(const Vec3f& v) : Vec3f(v) {
-    normalize();
+    for (size_t i = 0; i < 3; i++) {
+        x[i] = std::max(0.f, std::min(1.f, x[i] / 255.f));
+    }
 }
 
 Color::Color(const Color& c) : Vec3f(c) {}
 
-void Color::normalize() {
-    Vec3f::normalize();
+Color::Color(uint8_t c) {
+    c = std::max(0.f, std::min(1.f, c / 255.f));
     for (size_t i = 0; i < 3; i++) {
-        if (x[i] < 0) x[i] = 0;
+        x[i] = c;
+    } 
+}
+
+void Color::normalize() {
+    for (size_t i = 0; i < 3; i++) {
+        x[i] = std::max(0.f, std::min(1.f, x[i] / 255.f));
     }
 }
 
 std::ostream& operator<<(std::ostream& out, const Color& c) {
     for (size_t i = 0; i < 3; i++) {
-        out << (char) (c[i] * 255) << ' ';
+        out << char(c[i] * 255);
     }
     return out;
 }
@@ -138,4 +146,12 @@ std::istream& operator>>(std::istream& in, Color& c) {
         c[i] = std::max(0.f, std::min(1.f, c[i] / 255.f));
     }
     return in;
+}
+
+Color Color::operator*(float a) const {
+    Color res = *this;
+    for (size_t i = 0; i < 3; i++) {
+        res[i] = std::max(0.f, std::min(1.f, res[i] * a));
+    }
+    return res;
 }

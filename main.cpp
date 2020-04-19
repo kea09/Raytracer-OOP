@@ -5,7 +5,7 @@
 
 int main() {
     Renderer r {"result.ppm"};
-    Canvas cv {1280, 720};
+    Canvas cv {1000, 1000};
     Scene sc;
     LightSource ls;
     std::cout << "Light source: location (3 coordinates) and intensity\n";

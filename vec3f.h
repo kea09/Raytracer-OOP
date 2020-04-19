@@ -15,7 +15,7 @@ class Vec3f {
         Vec3f operator+(const Vec3f& v) const;
         Vec3f operator-() const;
         Vec3f operator-(const Vec3f& v) const;
-        float operator*(const Vec3f& v) const;
+        virtual float operator*(const Vec3f& v) const;
         Vec3f operator*(float a) const;
         float length();
         void normalize();
@@ -31,8 +31,10 @@ class Color: public Vec3f {
         Color(uint8_t in_x[3]);
         Color(const Vec3f& v);
         Color(const Color& c);
+        Color(uint8_t c);
+        virtual Color operator*(float a) const;
         void normalize();
 };
 
-std::ostream& operator<<(std::ostream& out, const Color& v);
+std::ostream& operator<<(std::ostream& out, const Color& c);
 std::istream& operator>>(std::istream& in, Color& c);

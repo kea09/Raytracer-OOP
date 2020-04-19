@@ -1,11 +1,14 @@
 #include "canvas.h"
+#include <iostream>
+using std::cout;
+using std::endl;
 using std::size_t;
 Canvas::Canvas(int w, int h) : width(w), height(h) {
-    for (size_t i = 0; i < w; i++) {
-        for (size_t j = 0; j < h; j++) {
+    for (size_t j = 0; j < h; j++) {
+        for (size_t i = 0; i < w; i++) {        
             Vec3f v;
-            v[0] = i * 2 / w - 1;
-            v[1] = - j * 2 / h - 1;
+            v[0] = i * 2.f / w - 1;
+            v[1] = (-1.f) * j * 2.f / h + 1;
             v[2] = 1;
             grid.push_back(Pixel(v));
         }

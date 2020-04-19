@@ -6,7 +6,7 @@
 class Scene {
     private:
         std::vector<Object*> objects;
-        std::vector<LightSource> vls;
+        LightSource ls;
     public:
         Scene();
         Color castRay(const Vec3f& ray) const;

@@ -6,21 +6,28 @@ using std::size_t;
 Scene::Scene() {}
 
 Color Scene::castRay(const Vec3f& ray) const {
+    Color c (255);
+    c = c * ls.getIntensity();
+    Vec3f dir(ray);
+    dir.normalize();
     float closest = std::numeric_limits<float>::infinity();
     const Object* closestobject = nullptr;
     for (const Object* obj: objects) {
-        std::vector<float> ch = obj->checkRay(Vec3f(), ray);
-        for (float k: ch) {
-            if (k > 1.f && k < closest) {
-                closest = k;
-                closestobject = obj;
-            }
+        float t1, t2;
+        obj->checkRay(Vec3f(), dir, t1, t2);
+        if (t1 > 1.f && t1 < closest) {
+            closest = t1;
+            closestobject = obj;
+        }
+        if (t2 > 1.f && t2 < closest) {
+            closest = t2;
+            closestobject = obj;
         }
     }
 
-    if (closestobject == nullptr)
-        return Color();
-    return closestobject->getColor();
+    if (closestobject != nullptr)
+        c = closestobject->getColor();
+    return c;
 }
 
 void Scene::addObject(Object& obj) {
@@ -28,5 +35,5 @@ void Scene::addObject(Object& obj) {
 }
 
 void Scene::addLightSource(const LightSource& ls) {
-    vls.push_back(ls);
+    this->ls = ls;
 }
