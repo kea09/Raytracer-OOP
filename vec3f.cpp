@@ -89,7 +89,7 @@ std::istream& operator>>(std::istream& in, Vec3f& v) {
     return in;
 }
 
-float Vec3f::length() {
+float Vec3f::length() const {
     float sum = 0;
     for (size_t i = 0; i < 3; i++) {
         sum += x[i] * x[i];

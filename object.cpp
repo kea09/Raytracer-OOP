@@ -41,7 +41,9 @@ void Sphere::checkRay(const Vec3f& origin, const Vec3f& direction, float& t1, fl
 }
 
 Vec3f Sphere::getNormalVector(const Vec3f& v) const {
-
+    Vec3f norm = v - location;
+    norm.normalize();
+    return norm;
 }
 
 std::istream& operator>>(std::istream& in, Sphere& sph) {

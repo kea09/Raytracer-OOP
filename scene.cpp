@@ -25,8 +25,12 @@ Color Scene::castRay(const Vec3f& ray) const {
         }
     }
 
-    if (closestobject != nullptr)
+    if (closestobject != nullptr) {
         c = closestobject->getColor();
+        Vec3f p = closest * dir;
+        Vec3f norm = closestobject->getNormalVector(p);
+        c = c * ls.getIntensity(p, norm);
+    }
     return c;
 }
 

@@ -17,7 +17,7 @@ class Vec3f {
         Vec3f operator-(const Vec3f& v) const;
         virtual float operator*(const Vec3f& v) const;
         Vec3f operator*(float a) const;
-        float length();
+        float length() const;
         void normalize();
 };
 
